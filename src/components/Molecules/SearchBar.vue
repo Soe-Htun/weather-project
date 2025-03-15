@@ -23,11 +23,11 @@
           lat: currentLocation.coord.lat,
           lon: currentLocation.coord.lon
         })"
-        class="suggestion-item"
+        class="current-location"
       >
         <WeatherCard :weather="currentLocation" />
       </li>
-      <li v-if="weatherStore.lastSearchData.length" class="suggestion-item">
+      <li v-if="weatherStore.lastSearchData.length" class="last-searched-item">
         <div v-for="item in weatherStore.lastSearchData" :key="item.name" class="mt-3">
           <div @click="selectCity({
             name: item.name,
@@ -214,9 +214,25 @@ onMounted(() => {
 .suggestions-list li:last-child {
   border: none;
 }
-
+.current-location {
+  padding: 12px 16px 0px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 .suggestion-item {
-  padding: 12px 16px;
+  padding: 12px 16px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.last-searched-item {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+  padding: 0px 16px;
   font-size: 14px;
   color: #333;
   cursor: pointer;

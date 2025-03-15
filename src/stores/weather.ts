@@ -7,9 +7,7 @@ import {
 } from "../@types/weather";
 import {
   dateFormat,
-  dayFormat,
   getWeatherIcon,
-  timeFormat,
 } from "../constants";
 
 export const useWeatherStore = defineStore("weather", {
@@ -30,10 +28,18 @@ export const useWeatherStore = defineStore("weather", {
         const { coord } = this.weatherData;
 
         if (coord) {
-          this.lastSearchData.push(this.weatherData);
-          if (this.lastSearchData.length > 3) {
-            this.lastSearchData.shift(); // Remove the oldest entry
+          // this.lastSearchData = this.lastSearchData.filter((data) => {
+          //   data.id !== this.weatherData?.id
+          // })
+          const filteredArray = this.lastSearchData.filter((item) => item.id !== this.weatherData?.id);
+
+          // removeDuplicates
+          filteredArray.push(this.weatherData);
+          if (filteredArray.length > 3) {
+            filteredArray.shift(); // Remove the oldest entry
           }
+          this.lastSearchData = filteredArray
+
 
           const response = await fetchWeatherForecast(coord.lat, coord.lon);
           this.HourlyForecast = response

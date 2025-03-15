@@ -5,6 +5,7 @@ interface Main {
   temp_min: number;
 }
 export interface WeatherData {
+    id?: number;
     sys?: {
       country: string
     };

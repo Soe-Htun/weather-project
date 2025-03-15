@@ -1,6 +1,18 @@
 import axios from "axios";
 import { BASE_URL, WEATHER_API_KEY } from "../constants";
 import { type WeatherData } from "../@types/weather";
+import { useToast } from "../composables/useToast";
+import type { AxiosErrorResponse } from "../@types/api";
+
+const { toaster } = useToast();
+
+const handleApiError = (error: unknown, customMessage = "An unexpected error occurred") => {
+  const axiosError = error as AxiosErrorResponse;
+  const errorMessage = axiosError.response?.data?.message || axiosError.message || customMessage;
+  toaster("error", errorMessage);
+  
+  throw new Error(customMessage);
+};
 
 export const fetchWeather = async (city: string): Promise<WeatherData> => {
   try {
@@ -9,7 +21,8 @@ export const fetchWeather = async (city: string): Promise<WeatherData> => {
     );
     return response.data;
   } catch (error) {
-    throw new Error("Failed to fetch weather data.");
+    handleApiError(error, "Failed to fetch weather data.");
+    return Promise.reject(error)
   }
 };
 
@@ -20,7 +33,8 @@ export const fetchCitySuggestions = async (query: string) => {
     );
     return response.data;
   } catch (error) {
-    throw new Error("Failed to fetch city suggestions.");
+    handleApiError(error, "Failed to fetch weather data.");
+    return Promise.reject(error)
   }
 };
 
@@ -31,7 +45,8 @@ export const fetchWeatherByCoords = async (lat: number, lon: number): Promise<We
     );
     return response.data;
   } catch (error) {
-    throw new Error("Failed to fetch weather data.");
+    handleApiError(error, "Failed to fetch weather data.");
+    return Promise.reject(error)
   }
 };
 
@@ -45,9 +60,9 @@ export const fetchWeatherForecast = async (lat: number, lon: number) => {
         appid: WEATHER_API_KEY,
       },
     });
-    return response.data.list; // Returns hourly forecast data
+    return response.data.list;
   } catch (error) {
-    console.error('Error fetching hourly forecast:', error);
-    throw error;
+    handleApiError(error, "Failed to fetch weather data.");
+    return Promise.reject(error)
   }
 };
