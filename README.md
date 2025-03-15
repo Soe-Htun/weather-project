@@ -1,27 +1,28 @@
 # Vue 3 + TypeScript + Vite
 
-Weather App
+# Weather App
 
-Overview
+## Overview
 
-A responsive weather application built with Vue.js and TypeScript, following the Atomic Design methodology. This project fetches weather data from OpenWeatherMap API and displays it in an intuitive UI.
+A responsive weather application built with **Vue.js** and **TypeScript**, following the **Atomic Design** methodology. This project fetches weather data from the **OpenWeatherMap API** and displays it in an intuitive UI.
 
-Features
+---
 
-Fetches weather data from OpenWeatherMap API
+## Features
 
-Displays current, hourly, and weekly forecasts
+- Fetches weather data from OpenWeatherMap API.
+- Displays current, hourly, and weekly forecasts.
+- Responsive design with optimized performance.
+- Uses **Vue Router** for navigation.
+- Implements global state management with **Pinia**.
+- **TypeScript** for better type safety.
 
-Responsive design with optimized performance
 
-Uses Vue Router for navigation
+---
 
-Implements global state management with Pinia
+## Project Structure
 
-TypeScript for better type safety
-
-Project Structure
-
+```plaintext
 src/
 │── components/
 │   ├── Atoms/        # Basic building blocks (e.g., buttons, inputs)
@@ -34,46 +35,59 @@ src/
 │── constants/        # Reusable functions and environment settings
 │── @types/           # TypeScript definitions
 │── App.vue           # Main application entry
+│── style.css         # Main style
 │── main.ts           # Initializes Vue instance
 │── router.ts         # Vue Router configuration
 │── README.md         # Project documentation
+```
 
+---
 
-Install dependencies:
+## Installation
 
-npm install
+## 1.Install dependencies:
 
-Create a .env file in the root and add your OpenWeatherMap API key:
+ ```plaintext
+ npm install
+```
 
+## 2.Create a .env file in the root and add your OpenWeatherMap API key:
+
+```plaintext
 VITE_WEATHER_API_KEY=d9e01151ba316205c1bee92a26db8f32
 VITE_BASE_URL=https://api.openweathermap.org
+```
 
-Start the development server:
+## 3.Start the development server:
 
-npm run dev
+```plaintext
+ npm run dev
+```
 
-Tech Stack
+## 4.Tech Stack
 
-Vue 3 (Composition API)
+- Vue 3 (Composition API)
 
-TypeScript
+- TypeScript
 
-Pinia (State Management)
+- Pinia (State Management)
 
-Vue Router
+- Vue Router
 
-SCSS (Styling)
+- SCSS (Styling)
 
-API Integration
+- API Integration
 
 The application fetches data from the OpenWeatherMap API. Ensure you have a valid API key in your .env file.
 
-Deployment
+## Deployment
 
 To build for production:
 
+```plaintext
 npm run build
+```
 
-Author
+## Author
 
 Soe Htun
