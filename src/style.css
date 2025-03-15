@@ -1,0 +1,84 @@
+body {
+  font-family: "SF Pro Display";
+  font-weight: 500;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+:root {
+  --primary-color: linear-gradient(118.25deg, #4F80FA 1.2%, #3764D7 59.26%, #335FD1 79.2%);
+  --secondary-color: #F7F7F9;
+}
+.text-2xl {
+ font-size: 51px;
+}
+.text-xl {
+ font-size: 30px;
+}
+.text-lg {
+  font-size: 22px;
+}
+.text-md {
+  font-size: 17px;
+}
+.text-sm {
+  font-size: 15px;
+}
+.font-600 {
+  font-weight: 600;
+}
+.font-700 {
+  font-weight: 700;
+}
+.leading-0 {
+  line-height: 0;
+}
+.leading-1 {
+  line-height: 0.5;
+}
+.mb-3 {
+  margin-bottom: 2rem;
+}
+
+.justify-between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.mx-4 {
+  margin: 0px 10px;
+}
+.m-0 {
+  margin: 0;
+}
+ul {
+  padding: 0px;
+}
+li {
+  list-style-type: none;
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.icon-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.mr-3 {
+  margin-right: 20px
+}
+.mt-1 {
+  margin-top: 15px;
+}
+.mt-3 {
+    margin-top: 20px
+}
+.mt-5 {
+  margin-top: 40px
+}
