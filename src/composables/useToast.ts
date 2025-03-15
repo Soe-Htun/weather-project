@@ -9,10 +9,14 @@ export const useToast = () => {
       theme: "colored",
       type: variant,
       position: "top-center",
-      hideProgressBar: true,
-      dangerouslyHTMLString: true,
-      closeButton: true,
-      autoClose: 3000
+      autoClose: 3000,
+      style: {
+        marginTop: "20px",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingLeft: "10px",
+        paddingRight: "10px"
+      },
     });
   };
 

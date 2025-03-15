@@ -76,6 +76,7 @@ html, body {
 }
 
 .profile-header {
+  max-width: 600px;
   width: 100%;
   height: 138px;
   background: linear-gradient(to bottom, #f0f4ff 100%, white 100%);
@@ -83,14 +84,15 @@ html, body {
   border-bottom-right-radius: 50% 50px;
   position: absolute;
   top: 0;
-  left: 0;
-  z-index: -1; 
+  left: 50%;
+  transform: translateX(-50%); 
+  z-index: -1;
 }
 
 .profile-container {
   padding: 0px;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .profile-body {
@@ -141,7 +143,7 @@ html, body {
   bottom: 0;
   left: 0;
   width: calc(100% - 40px);
-  max-width: 500px;
+  max-width: 600px;
   left: 50%;
   transform: translateX(-50%);
   padding: 20px;

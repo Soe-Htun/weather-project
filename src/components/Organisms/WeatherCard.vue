@@ -85,13 +85,13 @@ const currentTime = computed(() => {
 .top-row {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
-  line-height: 0.3;
+  line-height: 0;
 }
 .bottom-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-height: 0;
 }
 .sub-location {
   font-size: 16px;

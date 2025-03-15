@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Header -->
     <header class="header">
       <div class="header-content">
         <h1 class="text-2xl leading-1">Weather</h1>
@@ -28,6 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  max-width:600px;
 }
 
 .header-content {

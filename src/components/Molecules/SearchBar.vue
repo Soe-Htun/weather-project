@@ -28,7 +28,7 @@
         <WeatherCard :weather="currentLocation" />
       </li>
       <li v-if="weatherStore.lastSearchData.length" class="last-searched-item">
-        <div v-for="item in weatherStore.lastSearchData" :key="item.name" class="mt-3">
+        <div v-for="item in weatherStore.lastSearchData" :key="item.name">
           <div @click="selectCity({
             name: item.name,
             country: item.country,
@@ -150,7 +150,7 @@ onMounted(() => {
 <style scoped>
 .search-container {
   position: relative;
-  width: 500px;
+  width: 100%;
 }
 
 /* Input Field Wrapper */
@@ -229,9 +229,9 @@ onMounted(() => {
   transition: background-color 0.3s ease;
 }
 .last-searched-item {
-  margin-top: 10px;
+  margin-top: 13px;
   display: grid;
-  gap: 10px;
+  gap: 13px;
   padding: 0px 16px;
   font-size: 14px;
   color: #333;
