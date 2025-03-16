@@ -223,6 +223,7 @@ onMounted(() => {
   color: #333;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  /* background: red; */
 }
 .suggestion-item {
   padding: 12px 16px 12px;
@@ -232,6 +233,7 @@ onMounted(() => {
   transition: background-color 0.3s ease;
 }
 .last-searched-item {
+
   margin-top: 13px;
   display: grid;
   gap: 13px;

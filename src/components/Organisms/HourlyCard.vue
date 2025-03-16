@@ -29,14 +29,12 @@ defineProps<{
 <style scoped>
 .hourly-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 35px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* Ensures 4 equal columns */
+  gap: 15px;
   width: 100%;
   max-width: 100vw;
-  overflow: hidden;
+  padding: 0 15px;
   box-sizing: border-box;
-  margin: 0 auto;
-  padding: 0 20px;
   border-radius: 12px;
 }
 
@@ -46,21 +44,20 @@ defineProps<{
   padding: 10px 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   height: 150px;
-}
-.weather-icon img {
-  transform: scale(1.5);
-  height: 90px;
-  transform-origin: center;
-  object-fit: contain;
-  /* margin-right: 20px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .hourly-container {
-    gap: 20px;
-  }
+.weather-icon img {
+  height: 60px; /* Reduce size for better fit */
+  max-width: 80px;
+  object-fit: contain;
+  transform: scale(1.8);
+  margin-bottom: 10px;
 }
+
 .hour-temp {
   font-size: 18px;
   font-weight: 600;
@@ -71,8 +68,26 @@ defineProps<{
   font-size: 14px;
   color: #666;
 }
-/* .icon {
-  width: 40px !important;
-  height: 40px !important;
-} */
+
+/* Mobile Styles */
+@media (min-width: 768px) {
+  .hourly-container {
+    grid-template-columns: repeat(4, 1fr); /* Keep 4 columns */
+    gap: 20px;
+  }
+
+  .hourly-card {
+    height: 180px;
+    padding: 15px 0;
+  }
+  .weather-icon img {
+    height: 80px;
+    max-width: 100px;
+    object-fit: contain;
+    transform: scale(2.1); 
+  }
+  .hour-temp {
+    margin-top: 15px;
+  }
+}
 </style>

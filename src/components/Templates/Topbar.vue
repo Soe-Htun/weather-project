@@ -28,6 +28,7 @@
   align-items: center;
   padding: 10px;
   max-width:768px;
+  width: 100%;
 }
 
 .header-content {

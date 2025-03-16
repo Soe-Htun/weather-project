@@ -84,6 +84,19 @@ VITE_BASE_URL=https://api.openweathermap.org
 
 The application fetches data from the OpenWeatherMap API. Ensure you have a valid API key in your .env file.
 
+
+## UI Guidelines & Known Issues
+
+## 1. Icon Size & Positioning Issues
+
+Some Figma icons(eg. partly_cloudy) are not aligned properly or have inconsistent sizes. This may cause visual inconsistencies in the UI.
+
+## Solution:
+
+- Ensure all icons have a uniform size (e.g., 24x24px).
+
+- Use SVG viewBox adjustments to align them correctly
+
 ## Deployment
 
 To build for production:

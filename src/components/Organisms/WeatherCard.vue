@@ -8,7 +8,7 @@
         <div class="top-row">
           <div>
             <p class="text-xl font-700" v-if="isCurrentLocation">My Location</p>
-            <p :class="isCurrentLocation? 'sub-location' : 'text-xl font-700'">{{ weather.sys?.country ? weather.name + ', ' + weather.sys.country : weather.name }}</p>
+            <p :class="isCurrentLocation? 'sub-location location-text' : 'text-xl font-700 location-text'">{{ weather.sys?.country ? weather.name + ', ' + weather.sys.country : weather.name }}</p>
             <p  v-if="!isCurrentLocation" class="sub-location">{{ currentTime }}</p>
           </div>
           <p class="text-2xl font-600">{{ Math.round(weather.main?.temp) }}°</p>
@@ -87,6 +87,12 @@ const currentTime = computed(() => {
   justify-content: space-between;
   line-height: 0;
 }
+
+.location-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .bottom-row {
   display: flex;
   justify-content: space-between;

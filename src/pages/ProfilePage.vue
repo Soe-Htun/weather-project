@@ -182,7 +182,7 @@ html, body {
   background-color: #1d1d42;
   color: white;
   width: 100%;
-  padding: 20px 12px;
+  padding: 17px 12px;
   font-size: 16px;
   border-radius: 10px;
   border: none;
