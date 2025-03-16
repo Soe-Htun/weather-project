@@ -79,9 +79,10 @@ const focused = ref(false);
 
 .has-value ~ .label {
   top: 6px;
+  margin-top: 2px;
   font-size: 12px;
-  border: 1px solid #f5f5f5;
-  background: #fff;
+  /* border: 1px solid #f5f5f5;
+  background: #fff; */
 }
 .has-value {
   border: 2px solid #f5f5f5;
