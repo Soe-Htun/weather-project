@@ -21,9 +21,15 @@
       </div>
       
       <div class="input-container">
-        <BaseInput label="Full Name" v-model="editedUser.name" :readonly="!isEditing" />
-        <BaseInput label="Email" type="email" v-model="editedUser.email" :readonly="!isEditing" />
-        <BaseInput label="Phone Number" type="tel" v-model="editedUser.phone" :readonly="!isEditing" />
+        <BaseInput label="Full Name" v-model="editedUser.name" :readonly="!isEditing"
+        :error="v$.name.$errors.length? v$.name.$errors[0].$message : ''" 
+        />
+        <BaseInput label="Email" type="email" v-model="editedUser.email" :readonly="!isEditing"
+          :error="v$.email.$errors.length? v$.email.$errors[0].$message: '' " 
+        />
+        <BaseInput label="Phone Number" type="tel" v-model="editedUser.phone" :readonly="!isEditing"
+          :error="v$.phone.$errors.length? v$.phone.$errors[0].$message : '' " 
+        />
       </div>
 
       <div class="footer">
@@ -32,18 +38,19 @@
         </button>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/auth";
 import Back from "../components/Atoms/Back.vue";
 import Icons from "../components/Atoms/Icons.vue";
 import BaseInput from "../components/Atoms/BaseInput.vue";
 import { useToast } from "../composables/useToast";
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength, helpers } from "@vuelidate/validators";
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
@@ -51,11 +58,33 @@ const { user } = storeToRefs(userStore);
 const isEditing = ref(false);
 const editedUser = ref({ ...user.value });
 
-const { toaster } = useToast()
-const toggleEditing = () => {
+const { toaster } = useToast();
+const rules = computed(() => {
+  return {
+    name: {
+      required: helpers.withMessage("Name is required", required)
+    },
+    email: {
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Invalid email format", email),
+    },
+    phone: {
+      required: helpers.withMessage("Phone is required", required),
+      minLength: helpers.withMessage("Phone must be at least 10 characters", minLength(10)),
+    },
+  }
+})
+const v$ = useVuelidate(rules, editedUser);
+
+const toggleEditing = async() => {
   if (isEditing.value) {
+    const isValid = await v$.value.$validate()
+    if(!isValid) {
+      // toaster("error", "Please fill out the required fields correctly")
+      return
+    }
     user.value = { ...editedUser.value };
-    toaster("success", 'Update has been successfully');
+    toaster("success", 'Successfully updated profile');
   } else {
     editedUser.value = { ...user.value };
   }
@@ -76,7 +105,7 @@ html, body {
 }
 
 .profile-header {
-  max-width: 600px;
+  max-width: 768px;
   width: 100%;
   height: 138px;
   background: linear-gradient(to bottom, #f0f4ff 100%, white 100%);
@@ -92,7 +121,7 @@ html, body {
 .profile-container {
   padding: 0px;
   width: 100%;
-  max-width: 600px;
+  max-width: 768px;
   margin: 0 auto;
 }
 .profile-body {
@@ -143,7 +172,7 @@ html, body {
   bottom: 0;
   left: 0;
   width: calc(100% - 40px);
-  max-width: 600px;
+  max-width: 768px;
   left: 50%;
   transform: translateX(-50%);
   padding: 20px;

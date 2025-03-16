@@ -5,7 +5,6 @@
       <div>
       </div>
       <p v-if="weatherStore.loading">Loading...</p>
-      <p v-if="weatherStore.error">{{ weatherStore.error }}</p>
     </div>
   </template>
   
@@ -20,7 +19,7 @@
 .container {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 768px;
   margin: 0 auto;
 }
 

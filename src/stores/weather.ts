@@ -7,6 +7,7 @@ import {
 } from "../@types/weather";
 import {
   dateFormat,
+  dayFormat,
   getWeatherIcon,
 } from "../constants";
 
@@ -17,26 +18,23 @@ export const useWeatherStore = defineStore("weather", {
     HourlyForecast: [] as HourlyForecast[],
     WeeklyForecast: [] as WeeklyForecast[],
     loading: false,
-    error: null as string | null,
+    error: ''
   }),
   actions: {
     async getWeather(city: string) {
       this.loading = true;
-      this.error = null;
+      this.error = ''
       try {
         this.weatherData = await fetchWeather(city);
         const { coord } = this.weatherData;
 
         if (coord) {
-          // this.lastSearchData = this.lastSearchData.filter((data) => {
-          //   data.id !== this.weatherData?.id
-          // })
           const filteredArray = this.lastSearchData.filter((item) => item.id !== this.weatherData?.id);
 
           // removeDuplicates
           filteredArray.push(this.weatherData);
           if (filteredArray.length > 3) {
-            filteredArray.shift(); // Remove the oldest entry
+            filteredArray.shift();
           }
           this.lastSearchData = filteredArray
 
@@ -67,9 +65,7 @@ export const useWeatherStore = defineStore("weather", {
 
           this.WeeklyForecast = response
             .filter((item: WeatherData) => {
-              const dateStr = dateFormat.format(new Date(item.dt_txt ?? "")); // Convert to "YYYY-MM-DD"
-
-              // Exclude today's date and ensure uniqueness
+              const dateStr = dateFormat.format(new Date(item.dt_txt ?? ""));
               if (dateStr !== today && !uniqueDays.has(dateStr)) {
                 uniqueDays.add(dateStr);
                 return true;
@@ -79,15 +75,13 @@ export const useWeatherStore = defineStore("weather", {
             .slice(0, 4)
             .map((item: WeatherData) => ({
               temp: Math.floor(item.main.temp),
-              day: new Intl.DateTimeFormat("en-US", {
-                weekday: "long",
-              }).format(new Date(item.dt_txt ?? "")), // Get "Monday", "Tuesday", etc.
+              day: dayFormat.format(new Date(item.dt_txt?? '')), // Get "Monday", "Tuesday", etc.
               icon: getWeatherIcon(item.weather[0].main),
               condition: item.weather[0].main,
             }));
         }
       } catch (err) {
-        this.error = "Could not fetch data.";
+        this.error = 'Failed to fetch error'
       } finally {
         this.loading = false;
       }

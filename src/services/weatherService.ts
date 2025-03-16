@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL, WEATHER_API_KEY } from "../constants";
 import { type WeatherData } from "../@types/weather";
 import { useToast } from "../composables/useToast";
-import type { AxiosErrorResponse } from "../@types/api";
+import type { AxiosErrorResponse } from "../@types/axiosError";
 
 const { toaster } = useToast();
 

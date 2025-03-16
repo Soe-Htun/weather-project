@@ -11,6 +11,7 @@ A responsive weather application built with **Vue.js** and **TypeScript**, follo
 ## Features
 
 - Fetches weather data from OpenWeatherMap API.
+- Form validation with **Vuelidate**.
 - Displays current, hourly, and weekly forecasts.
 - Responsive design with optimized performance.
 - Uses **Vue Router** for navigation.
@@ -29,6 +30,7 @@ src/
 │   ├── Molecules/    # Combinations of atoms (e.g., search bar)
 │   ├── Organisms/    # Complex UI sections (e.g., weather cards)
 │   ├── Templates/    # Layout-level structures
+│── composbales/      # Reusable logic
 │── pages/            # Main views (e.g., Home, Profile, Weather)
 │── services/         # API integrations
 │── stores/           # Global state management
@@ -73,6 +75,8 @@ VITE_BASE_URL=https://api.openweathermap.org
 - Pinia (State Management)
 
 - Vue Router
+
+- Vuelidate (Form Validation) 
 
 - SCSS (Styling)
 

@@ -7,16 +7,21 @@ import type { IconList } from "./@types/weather";
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
+// Get hh:mm am or pm
 export const timeFormat = new Intl.DateTimeFormat("en-US", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
     timeZone: "UTC",
 })
+
+// Get "Monday", "Tuesday", etc.
 export const dayFormat = new Intl.DateTimeFormat("en-US", {
   weekday: 'long',
   timeZone: "UTC",
 })
+
+// Get yyyy-mm-dd
 export const dateFormat = new Intl.DateTimeFormat('en-US', {
 	year: 'numeric',
 	month: 'short',

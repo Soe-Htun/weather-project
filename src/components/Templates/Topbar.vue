@@ -27,7 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  max-width:600px;
+  max-width:768px;
 }
 
 .header-content {

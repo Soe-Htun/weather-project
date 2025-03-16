@@ -3,32 +3,35 @@
     <input
       :id="id"
       :type="type || 'text'"
-      :value="modelValue"
+      v-model="modelValue"
       :readonly="readonly"
       class="input"
-      :class="{ 'input-readonly': readonly, 'has-value': !readonly }"
+      :class="{ 'input-readonly': readonly, 'has-value': !readonly, 'input-error': error }"
       @focus="focused = true"
       @blur="focused = modelValue ? true : false"
-      @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
     <label :for="id" class="label" :class="{ 'label-active': focused || modelValue }">
       {{ label }}
     </label>
+    <p v-if="error" class="text-error m-0">{{ error }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 
 defineProps<{
-  modelValue: string;
+  // modelValue: string;
   label: string;
   type?: string;
   readonly?: boolean;
   id?: string;
+  error?: string | Ref<string | undefined>  
 }>();
 
-const emit = defineEmits(["update:modelValue"]);
+const modelValue = defineModel<string>();
+
+// const emit = defineEmits(["update:modelValue"]);
 const focused = ref(false);
 </script>
 
@@ -83,5 +86,10 @@ const focused = ref(false);
 .has-value {
   border: 2px solid #f5f5f5;
   background: #fff;
+}
+.input-error {
+  border: 1px solid #eb5757 !important;
+  background: #fff;
+  margin-bottom: 3px;
 }
 </style>

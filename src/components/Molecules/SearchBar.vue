@@ -10,7 +10,9 @@
       />
 
       <button v-if="query" @click="clearInput" class="clear-button">
-        <Icons name="clear" class="clear-icon" />
+        <div class="clear-icon">
+          <Icons name="clear"  />
+        </div>
       </button>
     </div>
 
@@ -65,7 +67,7 @@ import type { WeatherData } from "../../@types/weather";
 import { useRouter } from "vue-router";
 import Icons from "../Atoms/Icons.vue";
 
-const query = ref<string | null>(""); // Allow `null` to reset properly
+const query = ref<string | null>("");
 const suggestions = ref<{ name: string; country: string; lat: number; lon: number }[]>([]);
 const currentLocation = ref<WeatherData | null>(null);
 const weatherStore = useWeatherStore();
@@ -76,7 +78,6 @@ const fetchLocations = async () => {
     suggestions.value = [];
     return;
   }
-
   try {
     suggestions.value = await fetchCitySuggestions(query.value);
   } catch (error) {
@@ -110,7 +111,6 @@ const fetchCurrentLocation = () => {
             temp_min: weatherData.main?.temp_min ?? 0,
           }
         };
-        weatherStore.error= "" //clear api error in home page
       } catch (error) {
         console.error("Error fetching current location weather:", error);
       }
@@ -122,17 +122,22 @@ const fetchCurrentLocation = () => {
 
 
 // Select City
-const selectCity = (city: { name: string; country: string; lat: number; lon: number }) => {
+const selectCity = async (city: { name: string; country: string; lat: number; lon: number }) => {
   query.value = `${city.name}, ${city.country}`;
   suggestions.value = [];
-  weatherStore.getWeather(city.name);
-  router.push("/weather")
+  try {
+    await weatherStore.getWeather(city.name);
+    if (!weatherStore.error) {
+      router.push("/weather");
+    }
+  } catch (err) {
+    console.error("Failed to fetch weather data:", err);
+  }
 };
 
 const clearInput = () => {
   query.value = "";
-  suggestions.value = []; 
-  // weatherStore.weatherData = [];
+  suggestions.value = [];
   fetchCurrentLocation();
 };
 
@@ -152,8 +157,6 @@ onMounted(() => {
   position: relative;
   width: 100%;
 }
-
-/* Input Field Wrapper */
 .input-wrapper {
   position: relative;
   display: flex;
@@ -245,7 +248,7 @@ li {
 
 @media (max-width: 768px) {
   .search-container {
-    width: 100%; /* Full width on small screens */
+    width: 100%;
     max-width: 100%;
   }
 }

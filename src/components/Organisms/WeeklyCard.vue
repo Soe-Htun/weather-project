@@ -36,13 +36,6 @@ defineProps<{ weeklyData: WeeklyForecast[] }>();
 </script>
 
 <style scoped>
-h3 {
-  text-align: left;
-  margin: 20px;
-  font-size: 24px;
-  color: #000;
-}
-
 .weekly-card {
   display: flex;
   justify-content: space-between;

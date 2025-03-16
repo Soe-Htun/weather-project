@@ -37,6 +37,7 @@ defineProps<{
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 20px;
+  border-radius: 12px;
 }
 
 .hourly-card {
