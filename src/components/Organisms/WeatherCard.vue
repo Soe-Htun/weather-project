@@ -88,10 +88,10 @@ const currentTime = computed(() => {
   line-height: 0;
 }
 
-.location-text {
+/* .location-text {
   white-space: nowrap;
   text-overflow: ellipsis;
-}
+} */
 
 .bottom-row {
   display: flex;
