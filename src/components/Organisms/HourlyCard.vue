@@ -5,8 +5,10 @@
         <img
           :src="getWeatherImgPath(hour.icon)"
           :class="[
-                hour.icon === 'night-storm' ? 'mt-3 ' : '',
-                hour.icon === 'cloudy' ? 'mr-3' : ''
+                hour.icon === 'night-storm' ? 'night-storm mt-3 ' : '',
+                hour.icon === 'cloudy' ? 'mr-3' : '',
+                hour.icon === 'partly-cloudy' ? 'partly-cloud' : ''
+
             ]"
           alt="Weather Icon"
         />
@@ -54,8 +56,22 @@ defineProps<{
   height: 60px; /* Reduce size for better fit */
   max-width: 80px;
   object-fit: contain;
-  transform: scale(1.8);
+  transform: scale(2.5);
   margin-bottom: 10px;
+}
+.partly-cloud {
+    height: 80px;
+    max-width: 100px;
+    object-fit: contain;
+    transform: scale(1) !important; 
+    margin-right: 8px;
+}
+.night-storm {
+  height: 60px;
+  max-width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transform: scale(1.9) !important;
 }
 
 .hour-temp {

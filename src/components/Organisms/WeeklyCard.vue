@@ -10,7 +10,8 @@
             alt="Weather Icon"
             :class="[
                 day.icon === 'night-storm' ? 'mt-3 weather-icon' : 'weather-icon ',
-                day.icon === 'cloudy' ? 'mr-3 weather-icon' : 'weather-icon'
+                day.icon === 'cloudy' ? 'mr-3 weather-icon' : 'weather-icon',
+                day.icon === 'partly-cloudy' ? 'mr-3 partly-cloud' : 'weather-icon'
             ]"
           />
 
@@ -54,18 +55,22 @@ defineProps<{ weeklyData: WeeklyForecast[] }>();
 }
 
 .weather-icon-container {
-  width: 60px; /* Fixed container width */
-  height: 60px; /* Fixed container height */
+  width: 60px;
+  height: 60px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #9ab6ff; /* Background color for the icon */
-  border-radius: 50%; /* Border radius for the icon container */
-  overflow: hidden; /* Prevent overflow */
+  background: #9ab6ff;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .weather-icon {
   transform: scale(1.2);
+  object-fit: contain; /* Maintain aspect ratio */
+}
+.partly-cloud {
+  transform: scale(0.6) !important;
   object-fit: contain; /* Maintain aspect ratio */
 }
 .mt-3 {

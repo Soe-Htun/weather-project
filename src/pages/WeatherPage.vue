@@ -13,6 +13,7 @@
           :class="[
                 weatherIcon === 'night-storm' ? 'mt-3' : 'mt-5',
                 weatherIcon === 'cloudy' ? 'mr-3' : 'mt-5',
+                weatherIcon === 'partly-cloudy' ? 'partly-cloud' : '',
             ]"
           />
         </div>
@@ -130,6 +131,13 @@ const refresh = () => {
   height: 70px;
   transform-origin: center;
   object-fit: contain;
+}
+.partly-cloud {
+  transform: scale(2.0) !important;
+  height: 70px;
+  transform-origin: center;
+  object-fit: contain;
+  margin-right: 20px;
 }
 
 </style>
