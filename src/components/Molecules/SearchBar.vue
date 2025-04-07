@@ -126,7 +126,7 @@ const selectCity = async (city: { name: string; country: string; lat: number; lo
   query.value = `${city.name}, ${city.country}`;
   suggestions.value = [];
   try {
-    await weatherStore.getWeather(city.name);
+    await weatherStore.getWeather(city.name, false);
     if (!weatherStore.error) {
       router.push("/weather");
     }

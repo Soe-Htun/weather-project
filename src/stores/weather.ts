@@ -21,7 +21,7 @@ export const useWeatherStore = defineStore("weather", {
     error: ''
   }),
   actions: {
-    async getWeather(city: string) {
+    async getWeather(city: string, isSave: boolean) {
       this.loading = true;
       this.error = ''
       try {
@@ -29,15 +29,15 @@ export const useWeatherStore = defineStore("weather", {
         const { coord } = this.weatherData;
 
         if (coord) {
-          const filteredArray = this.lastSearchData.filter((item) => item.id !== this.weatherData?.id);
-
-          // removeDuplicates
-          filteredArray.push(this.weatherData);
-          if (filteredArray.length > 3) {
-            filteredArray.shift();
+          if(isSave) {
+              const filteredArray = this.lastSearchData.filter((item) => item.id !== this.weatherData?.id);
+              // removeDuplicates
+              filteredArray.push(this.weatherData);
+              if (filteredArray.length > 3) {
+                filteredArray.shift();
+              }
+              this.lastSearchData = filteredArray
           }
-          this.lastSearchData = filteredArray
-
 
           const response = await fetchWeatherForecast(coord.lat, coord.lon);
           this.HourlyForecast = response

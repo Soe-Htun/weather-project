@@ -4,7 +4,7 @@
       <div class="header-content">
         <Back />
         <p class="text-lg">{{ weatherStore.weatherData.name }}, {{ weatherStore.weatherData.sys?.country }}</p>
-        <p></p>
+        <p @click="addLocation">+</p>
       </div>
       <p class="text-md m-0">{{ formattedDate }}</p>
       <div class="weather-icon">
@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useWeatherStore } from "../stores/weather";
 import Back from "../components/Atoms/Back.vue";
 import Icons from "../components/Atoms/Icons.vue";
@@ -73,6 +73,9 @@ const weatherIcon = computed(() => getWeatherIcon(weatherStore.weatherData?.weat
 const refresh = () => {
   weatherStore.getWeather(weatherStore.weatherData?.name || "");
 };
+const addLocation = async () => {
+  await weatherStore.getWeather(weatherStore.weatherData?.name || '', true);
+}
 </script>
 
 <style scoped>
