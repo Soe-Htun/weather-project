@@ -4,7 +4,13 @@
       <div class="header-content">
         <Back />
         <p class="text-lg">{{ weatherStore.weatherData.name }}, {{ weatherStore.weatherData.sys?.country }}</p>
-        <p @click="addLocation">+</p>
+        <p v-if="!isAlreadyAdded" @click="addLocation">
+          <Icons name="plus" />
+        </p>
+        <p v-else @click="removeLocation">
+          <Icons  name="trash" />
+        </p>
+
       </div>
       <p class="text-md m-0">{{ formattedDate }}</p>
       <div class="weather-icon">
@@ -52,6 +58,7 @@ import Icons from "../components/Atoms/Icons.vue";
 import HourlyCard from "../components/Organisms/HourlyCard.vue";
 import { getWeatherIcon, getWeatherImgPath } from "../constants";
 import WeeklyCard from "../components/Organisms/WeeklyCard.vue";
+import router from "../router";
 
 const weatherStore = useWeatherStore();
 
@@ -71,11 +78,23 @@ const formattedTime = computed(() => {
 const weatherIcon = computed(() => getWeatherIcon(weatherStore.weatherData?.weather?.[0]?.main));
 
 const refresh = () => {
-  weatherStore.getWeather(weatherStore.weatherData?.name || "");
+  weatherStore.getWeather(weatherStore.weatherData?.name || "", false);
 };
 const addLocation = async () => {
   await weatherStore.getWeather(weatherStore.weatherData?.name || '', true);
 }
+
+const isAlreadyAdded = computed(() =>
+  weatherStore.lastSearchData.some(
+    (item) => item.id === weatherStore.weatherData?.id
+  )
+);
+const removeLocation = () => {
+  weatherStore.lastSearchData = weatherStore.lastSearchData.filter(
+    (item) => item.id !== weatherStore.weatherData?.id
+  );
+  router.push("/")
+};
 </script>
 
 <style scoped>
