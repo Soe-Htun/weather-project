@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed } from "vue";
 import { useWeatherStore } from "../stores/weather";
 import Back from "../components/Atoms/Back.vue";
 import Icons from "../components/Atoms/Icons.vue";
